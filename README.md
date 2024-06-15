@@ -4,6 +4,9 @@ I have worked on this from 4-7.30 pm.
 
 ## run the app
 use php artisan serve to run the parser in FusionController.php
+
+This created an xml in storage/app/public/products.xml
+
 the WriteXmlService contains the process how I recursively created the array from the csv. 
 I have run out of time at the point where I need to separate the products and their variants. 
 Unfortunately I figured out too late that using an object instead of an array would have been much more beneficial, I underestimated the complexity of the xml file.
