@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Services\WriteXmlService;
+use Illuminate\Support\Facades\Storage;
 
 use function PHPUnit\Framework\assertFileExists;
 
@@ -17,8 +18,10 @@ class FirstTest extends DuskTestCase
     {
         $writeXmlService = new WriteXmlService;
         $array = ["this" => "is an array"];
-        $filename = "products.xml";
+        $path = 'storage/app/public/';
+        $filename = "yada.xml";
         $writeXmlService->arrayToXml($array, $filename);
-        $this->assertFileExists('storage/app/public/' . $filename);
+        $this->assertFileExists($path . $filename);
+        Storage::delete('public/' . $filename);
     }
 }
