@@ -18,7 +18,11 @@ class ProductsTest extends DuskTestCase
 
     public function test_products_xml(): void
     {
-        $this->buildDocument()->outputMemory(true);
+        $this->assertXmlFileEqualsXmlFile(
+            "public/test1.xml",
+            "public/files/prodsfromtest.xml"
+            // $this->buildDocument()->outputMemory(true)
+        );
     }
     protected function buildDocument(): XmlWriter
     {
