@@ -24,10 +24,10 @@ class FusionController extends BaseController
         $productsarray = $this->writeXmlService->parseCsv();
 
         //read array into xml
-        $this->writeXmlService->arrayToXml($productsarray);
+        $this->writeXmlService->arrayToXml($productsarray, "products.xml");
 
         // return dd($productsarray);
-
+        return view('welcome');
     }
 
  

@@ -110,7 +110,7 @@ class WriteXmlService
         // dd($productsarray);
         return $productsarray;
     }
-    public function arrayToXml($productsarray)
+    public function arrayToXml($productsarray, $filename)
     {
         $result = ArrayToXml::convert($productsarray, [
             'rootElementName' => 'catalog',
@@ -120,6 +120,6 @@ class WriteXmlService
             ],
         ], true, 'UTF-8');
 
-        Storage::put('public/products.xml', $result);
+        Storage::put('public/' . $filename, $result);
     }
 }
