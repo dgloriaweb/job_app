@@ -1,30 +1,68 @@
 <?xml version="1.0"?>
 <catalog xmlns="http://www.demandware.com/xml/impex/catalog/2006-10-31" catalog-id="TestCatalog">
-  <product product-id="PRODUCT123">
-    <display-name xml:lang="x-default">Product number 123</display-name>
+  <product product-id="PROD123">
+    <display-name xml:lang="x-default">Antman T-shirt</display-name>
     <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
     <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
-    <searchable-flag>false</searchable-flag>
-    <brand>SampleBrand™</brand>
-    <custom-attributes>
-      <custom-attribute attribute-id="boolFalse">false</custom-attribute>
-      <custom-attribute attribute-id="boolTrue">true</custom-attribute>
-      <custom-attribute attribute-id="multiWow">
-        <value>so</value>
-        <value>such</value>
-        <value>many</value>
-        <value>much</value>
-        <value>very</value>
-      </custom-attribute>
-      <custom-attribute attribute-id="primaryImage">product-123.png</custom-attribute>
-      <custom-attribute attribute-id="type">Examples</custom-attribute>
-      <custom-attribute attribute-id="zzz">Should be exported last within custom-attributes</custom-attribute>
-    </custom-attributes>
+    <brand>Marvel</brand>
     <variations>
       <variants>
-        <variant product-id="SKU0000001"/>
-        <variant product-id="SKU0000002"/>
-        <variant product-id="SKU0000003" default="true"/>
+        <variant product-id="Red"/>
+      </variants>
+    </variations>
+  </product>
+  <product product-id="PROD123">
+    <display-name xml:lang="x-default">Antman T-shirt</display-name>
+    <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <brand>Marvel</brand>
+    <variations>
+      <variants>
+        <variant product-id="Red"/>
+      </variants>
+    </variations>
+  </product>
+  <product product-id="PROD123">
+    <display-name xml:lang="x-default">Antman T-shirt</display-name>
+    <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <brand>Marvel</brand>
+    <variations>
+      <variants>
+        <variant product-id="Red"/>
+      </variants>
+    </variations>
+  </product>
+  <product product-id="PROD456">
+    <display-name xml:lang="x-default">Arrow's Arrow</display-name>
+    <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <brand>DC</brand>
+    <variations>
+      <variants>
+        <variant product-id="Metallic"/>
+      </variants>
+    </variations>
+  </product>
+  <product product-id="PROD456">
+    <display-name xml:lang="x-default">Arrow's Arrow</display-name>
+    <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <brand>DC</brand>
+    <variations>
+      <variants>
+        <variant product-id="Wood"/>
+      </variants>
+    </variations>
+  </product>
+  <product product-id="PROD456">
+    <display-name xml:lang="x-default">Arrow's Arrow</display-name>
+    <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <brand>DC</brand>
+    <variations>
+      <variants>
+        <variant product-id="Titanium"/>
       </variants>
     </variations>
   </product>

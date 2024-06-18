@@ -32,71 +32,41 @@ class ProductsTest extends DuskTestCase
         $xml->setIndentDefaults();
         $xml->startDocument();
         $xml->startCatalog('TestCatalog');
-        $xml->writeEntity($this->buildProductElement());
+        if (($handle = fopen("public/products.csv", "r")) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                // read the array of products
+                // run build the document on each line
+                $xml->writeEntity($this->buildProductElement($data));
+                // end loop
+            }
+        }
+
+
         $xml->endCatalog();
         $xml->endDocument();
 
         return $xml;
     }
-    protected function buildProductElement(): Product
+    protected function buildProductElement($data): Product
     {
-        $element = $this->buildBaseElement('Product');
-        // $element->setClassificationCategory('CAT123', 'TestCatalog');
-        // $element->setSitemap(1.0);
-        // // $element->setEncoding();
-        // $element->setImages(['product-123.png']);
-        // $element->setSharedVariationAttributes(['AT001', 'AT002']);
+        $element = $this->buildBaseElement('Product',0 , $data);
+        // $element->setEncoding();
+        
         $element->setVariants([
-            'SKU0000001' => false,
-            'SKU0000002' => false,
-            'SKU0000003' => true,
+            $data[4] => false
         ]);
-
-        // $element->addVariationGroups([
-        //     'PRODUCT123-Red',
-        //     'PRODUCT123-Yellow',
-        //     'PRODUCT123-Green',
+        // $element->addCustomAttributes([
+        //     'color'         => $data[4],
+        //     'size'          => $data[5],
         // ]);
 
         return $element;
     }
-    protected function buildBaseElement(string $type, int $number = 0): Product
+    protected function buildBaseElement(string $type, int $number = 0, $data): Product
     {
-        $invalidChar1 = chr(30); // Record Separator.
-        $invalidChar2 = chr(2);  // Start Of Text.
-
-        $element = new Product(mb_strtoupper($type) . '123');
-        $element->setDisplayName($type . ' number 123');
-        // $element->setLongDescription('<b>' . $type . '</b> The description for an <i>example</i> ' . mb_strtolower($type) . '! • Bullet' . $invalidChar1 . 'Point');
-        // $element->setUpc('50000000000' . $number);
-        // $element->setQuantities(); // include, but use defaults
-        // $element->setSearchRank(1);
-        $element->setBrand('SampleBrand™');
-        // $element->setOnlineFlag(true);
-        $element->setSearchableFlags(null, false, null);
-
-        // $element->setOnlineFromTo(
-        //     new DateTimeImmutable('2015-01-23 01:23:45'),
-        //     new DateTimeImmutable('2025-01-23 01:23:45')
-        // );
-
-        // $element->setPageAttributes(
-        //     'Amazing ' . $type,
-        //     'Buy our ' . $type . ' today!',
-        //     $type . ', test, example',
-        //     'http://example.com/' . mb_strtolower($type) . '/123'
-        // );
-
-        $element->addCustomAttributes([
-            'type'         => 'Examples',
-            'zzz'          => 'Should be exported last within' . $invalidChar2 . 'custom-attributes',
-            'primaryImage' => mb_strtolower($type) . '-123.png',
-            'multiWow'     => ['so', 'such', 'many', 'much', 'very'],
-            'boolTrue'     => true,
-            'boolFalse'    => false,
-        ]);
-
-        // $element->setImages([mb_strtolower($type) . '-123.png']);
+        $element = new Product($data[0]);
+        $element->setDisplayName($data[2]);
+        $element->setBrand($data[1]);
 
         return $element;
     }
