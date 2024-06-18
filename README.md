@@ -27,3 +27,5 @@ This is in tests/Browser/ProductsTest.php
 
 ## update2
 testing using php artisan dusk on tests/Browser/ProductsTest.php
+I've built the xml for the indivitual lines, but the variants is a separate story. I was planning to hack a new array, but I am 100% that's not the right thing to do. 
+If you still didn't check this by then, I might browse the original repo for more information on how to build variants into products.
