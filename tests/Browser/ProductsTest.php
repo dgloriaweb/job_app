@@ -53,7 +53,7 @@ class ProductsTest extends DuskTestCase
         // $element->setEncoding();
         
         $element->setVariants([
-            $data[4] => false
+            $data[3] => false
         ]);
         // $element->addCustomAttributes([
         //     'color'         => $data[4],

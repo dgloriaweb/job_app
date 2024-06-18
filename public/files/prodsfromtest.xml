@@ -7,7 +7,7 @@
     <brand>Marvel</brand>
     <variations>
       <variants>
-        <variant product-id="Red"/>
+        <variant product-id="897654321"/>
       </variants>
     </variations>
   </product>
@@ -18,7 +18,7 @@
     <brand>Marvel</brand>
     <variations>
       <variants>
-        <variant product-id="Red"/>
+        <variant product-id="897654322"/>
       </variants>
     </variations>
   </product>
@@ -29,7 +29,7 @@
     <brand>Marvel</brand>
     <variations>
       <variants>
-        <variant product-id="Red"/>
+        <variant product-id="897654323"/>
       </variants>
     </variations>
   </product>
@@ -40,7 +40,7 @@
     <brand>DC</brand>
     <variations>
       <variants>
-        <variant product-id="Metallic"/>
+        <variant product-id="897654324"/>
       </variants>
     </variations>
   </product>
@@ -51,7 +51,7 @@
     <brand>DC</brand>
     <variations>
       <variants>
-        <variant product-id="Wood"/>
+        <variant product-id="897654325"/>
       </variants>
     </variations>
   </product>
@@ -62,7 +62,7 @@
     <brand>DC</brand>
     <variations>
       <variants>
-        <variant product-id="Titanium"/>
+        <variant product-id="897654326"/>
       </variants>
     </variations>
   </product>
