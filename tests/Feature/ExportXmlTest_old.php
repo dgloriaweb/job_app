@@ -12,7 +12,7 @@ class ExportXmlTest extends TestCase
     public function test_xml_match(): void
     {
         // $actualxmlFile    =  '/testproductoutput.xml';
-        $actualxmlFile    =  'storage\app\public\products.xml';
+        $actualxmlFile    =  'storage/app/public/products.xml';
         $expectedxmlFile  =  'public/test2.xml';
           // Assert function to test whether given  
         // expected xml file is equal to actual xml file or not 

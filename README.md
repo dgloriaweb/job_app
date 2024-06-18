@@ -21,6 +21,9 @@ I have been analysing the ProductsTest.php file in the repo you've sent, and I f
 ### thank you, best regards, 
 &copy; Beatrix
 
-# update
+## update
 Sunday I've continued to add tests and figured out some of the build with test funcionality. However I still need to use the csv data instead of the mock.
 This is in tests/Browser/ProductsTest.php
+
+## update2
+testing using php artisan dusk on tests/Browser/ProductsTest.php
