@@ -5,6 +5,13 @@
     <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
     <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
     <brand>Marvel</brand>
+    <variations>
+      <variants>
+        <variant product-id="897654321"/>
+        <variant product-id="897654322" default="true"/>
+        <variant product-id="897654323"/>
+      </variants>
+    </variations>
   </product>
   <product product-id="897654322">
     <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
@@ -20,12 +27,21 @@
       <custom-attribute attribute-id="size">Large</custom-attribute>
     </custom-attributes>
   </product>
-  <product product-id="897654324">
+  <product product-id="PROD456">
+    <display-name xml:lang="x-default">Arrow's Arrow</display-name>
     <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
     <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
-    <custom-attributes>
-      <custom-attribute attribute-id="size">Standard</custom-attribute>
-    </custom-attributes>
+    <brand>DC</brand>
+    <variations>
+      <variants>
+        <variant product-id="897654321"/>
+        <variant product-id="897654322" default="true"/>
+        <variant product-id="897654323"/>
+        <variant product-id="897654324" default="true"/>
+        <variant product-id="897654325"/>
+        <variant product-id="897654326"/>
+      </variants>
+    </variations>
   </product>
   <product product-id="897654325">
     <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
