@@ -1,2 +1,10 @@
 <?xml version="1.0"?>
-<catalog xmlns="http://www.demandware.com/xml/impex/catalog/2006-10-31" catalog-id="TestCatalog"
+<catalog xmlns="http://www.demandware.com/xml/impex/catalog/2006-10-31" catalog-id="TestCatalog">
+  <product product-id="897654326">
+    <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <custom-attributes>
+      <custom-attribute attribute-id="size">Exploding</custom-attribute>
+    </custom-attributes>
+  </product>
+</catalog>

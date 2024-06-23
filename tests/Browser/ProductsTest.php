@@ -36,10 +36,13 @@ class ProductsTest extends DuskTestCase
         $savedProductId = "";
         if (($handle = fopen("public/products.csv", "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                // make "default" to a boolean
+                $defaultVariant = $data[6] == "Y" ? true : false;
+
                 // write the array. 
                 // first element is the main product with id, display name, brand
                 if ($savedProductId == "") {
-                    $productsArray[] = [
+                    $productsArray[$data[0]] = [
                         "product_id" => $data[0],
                         "brand" => $data[1],
                         "display_name" => $data[2],
@@ -50,7 +53,7 @@ class ProductsTest extends DuskTestCase
                                     "_attributes"
                                     => [
                                         "_product-id" => $data[3],
-                                        "default" => $data[6]
+                                        "default" => $defaultVariant
                                     ]
                                 ]
                             ]
@@ -58,13 +61,35 @@ class ProductsTest extends DuskTestCase
                     ];
                     $savedProductId = $data[0];
                 } else {
-                    // find the id of the array that has this product id in it
-                    die();
+                    // if variants exist, add all of them from second item to array as first level elements
+                    // as variant id, custom attributes
+                    $productsArray[$savedProductId]["variations"]["variants"]["variant"] =  [
+                        "_attributes"
+                        => [
+                            "_product-id" => $data[3],
+                            "default" => $data[6]
+                        ]
+                    ];
+
+                    // along with the variants as first level elements, add the id to the main product level as well, along
+                    // with the default = true/false
+                    $productsArray[$data[3]] = [
+                        "product_id" => $data[3],
+                        "custom-attributes" =>
+                        [
+                            "custom-attribute" =>
+                            [
+                                "attribute-id" => "colour",
+                                "__text" => $data[4]
+                            ],
+                            "custom-attribute" =>
+                            [
+                                "attribute-id" => "size",
+                                "__text" => $data[5]
+                            ],
+                        ]
+                    ];
                 }
-                // if variants exist, add all of them from second item to array as first level elements
-                // as variant id, custom attributes
-                // along with the variants as first level elements, add the id to the main product level as well, along
-                // with the default = true/false
                 // if they are over, jump to the next main product id
             }
         }
@@ -84,21 +109,46 @@ class ProductsTest extends DuskTestCase
         $element = $this->buildBaseElement('Product', 0, $data);
         // $element->setEncoding();
 
-        $element->setVariants([
-            $data[3] => false
-        ]);
-        // $element->addCustomAttributes([
-        //     'color'         => $data[4],
-        //     'size'          => $data[5],
-        // ]);
-
         return $element;
     }
-    protected function buildBaseElement(string $type, int $number = 0, $data): Product
+    protected function buildBaseElement($data): Product
     {
-        $element = new Product($data[0]);
-        $element->setDisplayName($data[2]);
-        $element->setBrand($data[1]);
+        foreach ($data as $dataItem) {
+            // building the xml 
+            // add product id or variant id
+            $element = new Product($dataItem["product_id"]);
+
+            //if exists, add display name and brand
+            if (isset($dataItem["display_name"])) {
+                $element->setDisplayName($dataItem["display_name"]);
+                $element->setBrand($dataItem["brand"]);
+                // if the product has variations, loop through these
+                foreach ($dataItem["variations"] as $variation) {
+                    /* $element->setVariants([
+                            'SKU0000001' => false,
+                            'SKU0000002' => false,
+                            'SKU0000003' => true,
+                        ]);
+                        */
+                    if (
+                        $variation["variant"]["_attributes"]["_product-id"] && $variation["variant"]["_attributes"]["default"]
+                        && is_bool($variation["variant"]["_attributes"]["default"])
+                    ) {
+                        $element->setVariants(
+                            [
+                                $variation["variant"]["_attributes"]["_product-id"] => $variation["variant"]["_attributes"]["default"]
+                            ]
+                        );
+                    }
+                }
+            } else if (count($dataItem["custom-attributes"]) > 0) {
+                foreach ($dataItem["custom-attributes"] as $custom_attribute) {
+                    $element->addCustomAttributes([
+                        $custom_attribute["attribute-id"] => $custom_attribute["__text"]
+                    ]);
+                }
+            }
+        }
 
         return $element;
     }
