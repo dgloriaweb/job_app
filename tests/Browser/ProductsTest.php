@@ -122,6 +122,9 @@ class ProductsTest extends DuskTestCase
                 }
             }
             $element->setVariants($this->variantArray);
+
+            // also need to add this variant to the xml as a new entry
+
         }
 
 
@@ -136,7 +139,15 @@ class ProductsTest extends DuskTestCase
         if (isset($dataItem["display_name"])) {
             $element->setDisplayName($dataItem["display_name"]);
             $element->setBrand($dataItem["brand"]);
-        } else if (count($dataItem["custom-attributes"]) > 0) {
+        }
+        $variants = $dataItem["variations"]["variants"]["variant"] ?? false;
+        if (is_array($variants) || is_object($variants)) {
+            foreach ($variants as $variant) {
+                // build a new $element item
+                $element = new Product($variant["_product-id"]);
+            }
+        }
+        if (isset($dataItem["custom-attributes"]) && (count($dataItem["custom-attributes"])) > 0) {
             foreach ($dataItem["custom-attributes"] as $custom_attribute) {
                 $element->addCustomAttributes([
                     $custom_attribute["attribute-id"] => $custom_attribute["__text"]
