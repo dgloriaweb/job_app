@@ -9,12 +9,6 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use DateTimeImmutable;
-use PHPUnit\Framework\TestCase;
-use DemandwareXml\Test\FixtureHelper;
-use DemandwareXml\Writer\Entity\CustomAttribute;
-use DemandwareXml\Writer\Entity\DeletedProduct;
-use DemandwareXml\Writer\EntityWriter\CustomAttributeWriter;
-use InvalidArgumentException;
 
 class ProductsTest extends DuskTestCase
 {
@@ -38,15 +32,47 @@ class ProductsTest extends DuskTestCase
         $xml->setIndentDefaults();
         $xml->startDocument();
         $xml->startCatalog('TestCatalog');
+        $productsArray = [];
+        $savedProductId = "";
         if (($handle = fopen("public/products.csv", "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                // read the array of products
-                // run build the document on each line
-                $xml->writeEntity($this->buildProductElement($data));
-                // end loop
+                // write the array. 
+                // first element is the main product with id, display name, brand
+                if ($savedProductId == "") {
+                    $productsArray[] = [
+                        "product_id" => $data[0],
+                        "brand" => $data[1],
+                        "display_name" => $data[2],
+                        "variations" => [
+                            "variants" => [
+                                "variant" =>
+                                [
+                                    "_attributes"
+                                    => [
+                                        "_product-id" => $data[3],
+                                        "default" => $data[6]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ];
+                    $savedProductId = $data[0];
+                } else {
+                    // find the id of the array that has this product id in it
+                    die();
+                }
+                // if variants exist, add all of them from second item to array as first level elements
+                // as variant id, custom attributes
+                // along with the variants as first level elements, add the id to the main product level as well, along
+                // with the default = true/false
+                // if they are over, jump to the next main product id
             }
         }
 
+        // read the array of products
+        // run build the document on each line
+        $xml->writeEntity($this->buildProductElement($productsArray));
+        // end loop
 
         $xml->endCatalog();
         $xml->endDocument();
@@ -55,9 +81,9 @@ class ProductsTest extends DuskTestCase
     }
     protected function buildProductElement($data): Product
     {
-        $element = $this->buildBaseElement('Product',0 , $data);
+        $element = $this->buildBaseElement('Product', 0, $data);
         // $element->setEncoding();
-        
+
         $element->setVariants([
             $data[3] => false
         ]);
