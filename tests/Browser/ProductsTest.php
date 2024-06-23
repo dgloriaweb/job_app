@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use DateTimeImmutable;
+use PHPUnit\Framework\TestCase;
+use DemandwareXml\Test\FixtureHelper;
+use DemandwareXml\Writer\Entity\CustomAttribute;
+use DemandwareXml\Writer\Entity\DeletedProduct;
+use DemandwareXml\Writer\EntityWriter\CustomAttributeWriter;
+use InvalidArgumentException;
 
 class ProductsTest extends DuskTestCase
 {
