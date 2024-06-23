@@ -96,8 +96,10 @@ class ProductsTest extends DuskTestCase
 
         // read the array of products
         // run build the document on each line
-        $xml->writeEntity($this->buildProductElement($productsArray));
-        // end loop
+        foreach ($productsArray as $dataItem) {
+            $xml->writeEntity($this->buildProductElement($dataItem));
+            // end loop
+        }
 
         $xml->endCatalog();
         $xml->endDocument();
@@ -106,49 +108,49 @@ class ProductsTest extends DuskTestCase
     }
     protected function buildProductElement($data): Product
     {
-        $element = $this->buildBaseElement('Product', 0, $data);
+        $element = $this->buildBaseElement('Product', $data);
         // $element->setEncoding();
 
         return $element;
     }
-    protected function buildBaseElement($data): Product
+    protected function buildBaseElement(string $type, $dataItem): Product
     {
-        foreach ($data as $dataItem) {
-            // building the xml 
-            // add product id or variant id
-            $element = new Product($dataItem["product_id"]);
 
-            //if exists, add display name and brand
-            if (isset($dataItem["display_name"])) {
-                $element->setDisplayName($dataItem["display_name"]);
-                $element->setBrand($dataItem["brand"]);
-                // if the product has variations, loop through these
-                foreach ($dataItem["variations"] as $variation) {
-                    /* $element->setVariants([
+        // building the xml 
+        // add product id or variant id
+        $element = new Product($dataItem["product_id"]);
+
+        //if exists, add display name and brand
+        if (isset($dataItem["display_name"])) {
+            $element->setDisplayName($dataItem["display_name"]);
+            $element->setBrand($dataItem["brand"]);
+            // if the product has variations, loop through these
+            foreach ($dataItem["variations"] as $variation) {
+                /* $element->setVariants([
                             'SKU0000001' => false,
                             'SKU0000002' => false,
                             'SKU0000003' => true,
                         ]);
                         */
-                    if (
-                        $variation["variant"]["_attributes"]["_product-id"] && $variation["variant"]["_attributes"]["default"]
-                        && is_bool($variation["variant"]["_attributes"]["default"])
-                    ) {
-                        $element->setVariants(
-                            [
-                                $variation["variant"]["_attributes"]["_product-id"] => $variation["variant"]["_attributes"]["default"]
-                            ]
-                        );
-                    }
-                }
-            } else if (count($dataItem["custom-attributes"]) > 0) {
-                foreach ($dataItem["custom-attributes"] as $custom_attribute) {
-                    $element->addCustomAttributes([
-                        $custom_attribute["attribute-id"] => $custom_attribute["__text"]
-                    ]);
+                if (
+                    $variation["variant"]["_attributes"]["_product-id"] && $variation["variant"]["_attributes"]["default"]
+                    && is_bool($variation["variant"]["_attributes"]["default"])
+                ) {
+                    $element->setVariants(
+                        [
+                            $variation["variant"]["_attributes"]["_product-id"] => $variation["variant"]["_attributes"]["default"]
+                        ]
+                    );
                 }
             }
+        } else if (count($dataItem["custom-attributes"]) > 0) {
+            foreach ($dataItem["custom-attributes"] as $custom_attribute) {
+                $element->addCustomAttributes([
+                    $custom_attribute["attribute-id"] => $custom_attribute["__text"]
+                ]);
+            }
         }
+
 
         return $element;
     }

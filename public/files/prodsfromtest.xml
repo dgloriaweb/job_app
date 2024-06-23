@@ -1,5 +1,39 @@
 <?xml version="1.0"?>
 <catalog xmlns="http://www.demandware.com/xml/impex/catalog/2006-10-31" catalog-id="TestCatalog">
+  <product product-id="PROD123">
+    <display-name xml:lang="x-default">Antman T-shirt</display-name>
+    <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <brand>Marvel</brand>
+  </product>
+  <product product-id="897654322">
+    <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <custom-attributes>
+      <custom-attribute attribute-id="size">Medium</custom-attribute>
+    </custom-attributes>
+  </product>
+  <product product-id="897654323">
+    <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <custom-attributes>
+      <custom-attribute attribute-id="size">Large</custom-attribute>
+    </custom-attributes>
+  </product>
+  <product product-id="897654324">
+    <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <custom-attributes>
+      <custom-attribute attribute-id="size">Standard</custom-attribute>
+    </custom-attributes>
+  </product>
+  <product product-id="897654325">
+    <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <custom-attributes>
+      <custom-attribute attribute-id="size">Poisonous</custom-attribute>
+    </custom-attributes>
+  </product>
   <product product-id="897654326">
     <online-from xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
     <online-to xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
